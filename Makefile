@@ -11,6 +11,9 @@ PKG_COPY := $(wildcard *.md) $(shell cat PKG_COPY || true)
 SED_FILES := $(shell find . -iname '*.json' -type f) $(shell find . -iname '*.lua' -type f)
 OUT_FILES := $(SED_FILES:%=$(OUTPUT_DIR)/%)
 
+SED_EXPRS := -e 's/{{MOD_NAME}}/$(PACKAGE_NAME)/g'
+SED_EXPRS += -e 's/{{VERSION}}/$(VERSION_STRING)/g'
+
 all: package
 
 package-copy: $(PKG_DIRS) $(PKG_FILES)
@@ -21,8 +24,7 @@ endif
 
 $(OUTPUT_DIR)/%: %
 	mkdir -p $(@D)
-	sed -e 's/{{MOD_NAME}}/$(PACKAGE_NAME)/g' $< > $@
-	sed -e 's/{{VERSION}}/$(VERSION_STRING)/g' $< > $@
+	sed $(SED_EXPRS) $< > $@
 
 package: package-copy $(OUT_FILES)
 	cd pkg && zip -r $(OUTPUT_NAME).zip $(OUTPUT_NAME)
