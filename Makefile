@@ -22,6 +22,11 @@ ifneq ($(PKG_COPY),)
 	cp -r $(PKG_COPY) pkg/$(OUTPUT_NAME)
 endif
 
+$(OUTPUT_DIR)/%.lua: %.lua
+	mkdir -p $(@D)
+	sed $(SED_EXPRS) $< > $@
+	luac -p $@
+
 $(OUTPUT_DIR)/%: %
 	mkdir -p $(@D)
 	sed $(SED_EXPRS) $< > $@
