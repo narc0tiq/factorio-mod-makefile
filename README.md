@@ -17,6 +17,10 @@ with something like `echo 1.0.0 > VERSION`.
     - Note: this file is optional. You can also supply the version at run-time,
     either by setting the environment variable VERSION, or by passing it as a
     `make` argument as in `make VERSION=1.0.2`.
+    - Alternately, you can create the file `SHORT_VERSION`, which should
+    contain a two-part version number (e.g., `0.6`) -- the third part will be
+    filled in by appending the number of commits since the last tag matching
+    the `v[0-9]*.[0-9]*` wildcard.
 
 - The file `PKG_COPY` should contain a list of any files or folders that should
 be directly copied to the output package, i.e., without any variable expansion.
