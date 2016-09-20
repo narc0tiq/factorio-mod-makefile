@@ -31,7 +31,7 @@ endif
 
 $(OUTPUT_DIR)/%.lua: %.lua
 	mkdir -p $(@D)
-	sed $(SED_EXPRS) $< > $@
+	sed -e 's/{{__FILE__}}/'"$(strip $(subst /,\/, $(subst ./,,$*)))"'.lua/g' $(SED_EXPRS) $< > $@
 	luac -p $@
 
 $(OUTPUT_DIR)/%: %

@@ -59,6 +59,11 @@ name, as set in the `PKG_NAME` file. So if your `info.json` says
 given as explained above. Again, this is most useful for your `info.json`
 -- `"version":"{{VERSION}}"` will become `"version":"1.0.2"`.
 
+- `{{__FILE__}}` (including the braces and underscores) will get replaced by
+the path of the file being processed, relative to the `make` working directory.
+In most cases, this should be the plain filename, or something like
+`subdir/file.lua`. This is occasionally useful (for, e.g., logging warnings).
+
 
 ## License ##
 
