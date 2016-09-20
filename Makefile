@@ -14,7 +14,8 @@ OUTPUT_DIR := pkg/$(OUTPUT_NAME)
 
 PKG_COPY := $(wildcard *.md) $(shell cat PKG_COPY || true)
 
-SED_FILES := $(shell find . -iname '*.json' -type f) $(shell find . -iname '*.lua' -type f)
+SED_FILES := $(shell find . -iname '*.json' -type f \! -path './pkg/*') \
+             $(shell find . -iname '*.lua' -type f \! -path './pkg/*')
 OUT_FILES := $(SED_FILES:%=$(OUTPUT_DIR)/%)
 
 SED_EXPRS := -e 's/{{MOD_NAME}}/$(PACKAGE_NAME)/g'
