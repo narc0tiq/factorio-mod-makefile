@@ -1,5 +1,6 @@
 PKG_NAME := $(shell cat PKG_NAME)
 PACKAGE_NAME := $(if $(PKG_NAME),$(PKG_NAME),$(error No package name, please create PKG_NAME))
+PACKAGE_NAME := $(if $(DEV),$(PACKAGE_NAME)-dev,$(PACKAGE_NAME))
 ifneq ($(wildcard SHORT_VERSION),)
 	VERSION := $(shell cat SHORT_VERSION || true)
 	BUILD_NUMBER := $(shell git describe --tags --match 'v[0-9]*.[0-9]*' --long|cut -d- -f2 || echo 1)
