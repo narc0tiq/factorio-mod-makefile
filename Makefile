@@ -39,7 +39,9 @@ $(OUTPUT_DIR)/%: %
 	mkdir -p $(@D)
 	sed $(SED_EXPRS) $< > $@
 
-package: package-copy $(OUT_FILES)
+package-dir: package-copy $(OUT_FILES)
+
+package: package-dir
 	cd pkg && zip -r $(OUTPUT_NAME).zip $(OUTPUT_NAME)
 
 clean:
